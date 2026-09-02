@@ -36,6 +36,14 @@
           </a>
         </li>
 
+        {{-- JENIS PRODUK --}}
+        <li class="nav-item">
+          <a class="nav-link {{ Request::is('admin/jenis*') ? 'active' : '' }}"
+             href="{{ route('admin.jenis.index') }}">
+             Jenis
+          </a>
+        </li>
+
         {{-- PRODUK --}}
         <li class="nav-item">
           <a class="nav-link {{ Request::is('admin/produk*') ? 'active' : '' }}"
@@ -52,13 +60,7 @@
           </a>
         </li>
 
-        {{-- JENIS PRODUK --}}
-        <li class="nav-item">
-          <a class="nav-link {{ Request::is('admin/jenis*') ? 'active' : '' }}"
-             href="{{ route('admin.jenis.index') }}">
-             Jenis
-          </a>
-        </li>
+        
 
         {{-- TENTANG --}}
 <li class="nav-item">
