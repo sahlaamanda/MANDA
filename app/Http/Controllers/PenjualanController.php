@@ -197,10 +197,17 @@ class PenjualanController extends Controller
                 'status' => 'COMPLETED'
             ]);
 
-            return back()->with(
-                'success',
-                'Produk berhasil dichekout'
-            );
+            // FIX: jangan pakai back() di sini.
+            // Setelah status berubah jadi COMPLETED, halaman edit
+            // (yang jadi referer/URL sebelumnya) akan otomatis 403
+            // karena method edit() memblokir status COMPLETED.
+            // Redirect ke halaman detail/show transaksi ini saja.
+            return redirect()
+                ->route('admin.penjualan.show', $sale->id)
+                ->with(
+                    'success',
+                    'Produk berhasil dichekout'
+                );
         }
 
 

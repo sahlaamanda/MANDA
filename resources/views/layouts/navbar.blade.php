@@ -62,12 +62,18 @@
 
         
 
-        {{-- TENTANG --}}
+        {{-- PROFILE--}}
 <li class="nav-item">
-  <a class="nav-link {{ Request::is('admin/tentang*') ? 'active' : '' }}"
-     href="{{ route('admin.tentang') }}">
-     Tentang
+  <a class="nav-link {{ Request::is('admin/profile*') ? 'active' : '' }}"
+     href="{{ route('admin.profile') }}">
+     Profile
   </a>
+</li>
+
+<li class="nav-item">
+    <a href="{{ route('admin.about') }}" class="nav-link {{ request()->routeIs('admin.about') ? 'active' : '' }}">
+        <span>Tentang Aplikasi</span>
+    </a>
 </li>
 
       </ul>

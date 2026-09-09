@@ -64,10 +64,16 @@
 
         
 <li class="nav-item">
-  <a class="nav-link <?php echo e(Request::is('admin/tentang*') ? 'active' : ''); ?>"
-     href="<?php echo e(route('admin.tentang')); ?>">
-     Tentang
+  <a class="nav-link <?php echo e(Request::is('admin/profile*') ? 'active' : ''); ?>"
+     href="<?php echo e(route('admin.profile')); ?>">
+     Profile
   </a>
+</li>
+
+<li class="nav-item">
+    <a href="<?php echo e(route('admin.about')); ?>" class="nav-link <?php echo e(request()->routeIs('admin.about') ? 'active' : ''); ?>">
+        <span>Tentang Aplikasi</span>
+    </a>
 </li>
 
       </ul>

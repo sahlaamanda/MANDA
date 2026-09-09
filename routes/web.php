@@ -19,19 +19,15 @@ use App\Http\Controllers\UserController;
 
 Route::middleware('guest')->group(function () {
 
-
     Route::get('/login',
         [AuthController::class, 'index']
     )->name('login');
-
 
     Route::post('/auth',
         [AuthController::class, 'auth']
     )->name('auth');
 
-
 });
-
 
 
 /*
@@ -41,8 +37,6 @@ Route::middleware('guest')->group(function () {
 */
 
 Route::middleware('auth')->group(function () {
-
-
 
     /*
     |--------------------------------------------------------------------------
@@ -57,9 +51,6 @@ Route::middleware('auth')->group(function () {
     ->name('dashboard');
 
 
-
-
-
     /*
     |--------------------------------------------------------------------------
     | LOGOUT
@@ -70,10 +61,6 @@ Route::middleware('auth')->group(function () {
         [AuthController::class, 'logout']
     )
     ->name('logout');
-
-
-
-
 
 
     /*
@@ -87,20 +74,13 @@ Route::middleware('auth')->group(function () {
         ->name('admin.')
         ->group(function () {
 
-
             // CRUD USER
             Route::resource(
                 'users',
                 UserController::class
             );
 
-
         });
-
-
-
-
-
 
 
     /*
@@ -112,40 +92,38 @@ Route::middleware('auth')->group(function () {
     Route::middleware('role:admin,kasir')
         ->group(function () {
 
-
-
             /*
             |--------------------------------------------------------------------------
-            | PRODUK, ITEM PENJUALAN, JENIS & TENTANG
+            | PRODUK, ITEM PENJUALAN, JENIS, PROFILE & ABOUT
             |--------------------------------------------------------------------------
             */
 
             Route::prefix('admin')
-    ->name('admin.')
-    ->group(function () {
+                ->name('admin.')
+                ->group(function () {
 
-        Route::resource(
-            'produk',
-            ProdukController::class
-        );
+                    Route::resource(
+                        'produk',
+                        ProdukController::class
+                    );
 
-        Route::resource(
-            'itempenjualan',
-            ItemPenjualanController::class
-        );
+                    Route::resource(
+                        'itempenjualan',
+                        ItemPenjualanController::class
+                    );
 
-        Route::resource('jenis', JenisController::class)
-            ->parameters([
-                'jenis' => 'jenis',
-            ]);
+                    Route::resource('jenis', JenisController::class)
+                        ->parameters([
+                            'jenis' => 'jenis',
+                        ]);
 
-        Route::view('tentang', 'tentang.index')
-            ->name('tentang');
-    });
+                    Route::view('profile', 'profile.index')
+                        ->name('profile');
 
-
-
-
+                    // Disesuaikan dengan struktur folder views/tentang/about.blade.php
+                    Route::view('about', 'tentang.about')
+                        ->name('about');
+                });
 
 
             /*
@@ -154,52 +132,24 @@ Route::middleware('auth')->group(function () {
             |--------------------------------------------------------------------------
             */
 
-            // TAMBAHKAN ROUTE STRUK DI SINI (SEBELUM ATAU SESUDAH RESOURCE)
+            // ROUTE STRUK
             Route::get('penjualan/{penjualan}/struk', [PenjualanController::class, 'struk'])
                 ->name('admin.penjualan.struk');
-
 
             Route::resource(
                 'penjualan',
                 PenjualanController::class
             )
             ->names([
-
-
-                'index' =>
-                'admin.penjualan.index',
-
-
-                'create' =>
-                'admin.penjualan.create',
-
-
-                'store' =>
-                'admin.penjualan.store',
-
-
-                'show' =>
-                'admin.penjualan.show',
-
-
-                'edit' =>
-                'admin.penjualan.edit',
-
-
-                'update' =>
-                'admin.penjualan.update',
-
-
-                'destroy' =>
-                'admin.penjualan.destroy',
-
-
+                'index' => 'admin.penjualan.index',
+                'create' => 'admin.penjualan.create',
+                'store' => 'admin.penjualan.store',
+                'show' => 'admin.penjualan.show',
+                'edit' => 'admin.penjualan.edit',
+                'update' => 'admin.penjualan.update',
+                'destroy' => 'admin.penjualan.destroy',
             ]);
 
-
-
         });
-
-
 
 });
