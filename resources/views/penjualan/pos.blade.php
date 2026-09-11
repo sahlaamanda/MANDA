@@ -105,6 +105,49 @@
         border:2px solid #F4C2D7 !important;
         border-radius:12px !important;
     }
+
+    #cashPaymentBox{
+        display:none;
+        background:#FFF0F5;
+        border:2px solid #F4C2D7;
+        border-radius:12px;
+        padding:12px;
+        margin-bottom:10px;
+    }
+
+    #kembalianText{
+        font-weight:700;
+        color:#800020;
+    }
+
+    #kembalianText.text-danger{
+        color:#dc3545 !important;
+    }
+
+    #qrisPaymentBox{
+        display:none;
+        background:#FFF0F5;
+        border:2px solid #F4C2D7;
+        border-radius:12px;
+        padding:16px;
+        margin-bottom:10px;
+        text-align:center;
+    }
+
+    #qrisPaymentBox img{
+        max-width:220px;
+        width:100%;
+        border-radius:12px;
+        border:2px solid #F4C2D7;
+        background:#fff;
+        padding:8px;
+    }
+
+    #qrisPaymentBox .qris-total{
+        font-weight:700;
+        color:#800020;
+        margin-top:8px;
+    }
 </style>
 
 <div class="container mt-4">
@@ -389,7 +432,8 @@
                     {{-- CHECKOUT --}}
                     <form method="POST"
                           action="{{ route('admin.penjualan.update', $sale->id) }}"
-                          onsubmit="return confirm('Yakin ingin checkout?')">
+                          id="checkoutForm"
+                          onsubmit="return validateCashPayment()">
 
                         @csrf
                         @method('PUT')
@@ -397,6 +441,7 @@
 
 
                         <select name="payment_method"
+                                id="paymentMethod"
                                 class="form-select mb-2"
                                 required
                                 {{ $sale->status === 'COMPLETED' ? 'disabled' : '' }}>
@@ -404,21 +449,21 @@
 
                             <option value=""
                                     disabled
-                                    selected>
+                                    {{ old('payment_method') ? '' : 'selected' }}>
 
                                 Pilih Pembayaran
 
                             </option>
 
 
-                            <option value="CASH">
+                            <option value="CASH" {{ old('payment_method') === 'CASH' ? 'selected' : '' }}>
 
                                 Cash
 
                             </option>
 
 
-                            <option value="QRIS">
+                            <option value="QRIS" {{ old('payment_method') === 'QRIS' ? 'selected' : '' }}>
 
                                 QRIS
 
@@ -428,7 +473,40 @@
                         </select>
 
 
+                        {{-- JUMLAH BAYAR & KEMBALIAN (HANYA UNTUK CASH) --}}
+                        <div id="cashPaymentBox">
 
+                            <label class="form-label mb-1">Jumlah Bayar</label>
+                            <input type="number"
+                                   name="jumlah_bayar"
+                                   id="jumlahBayar"
+                                   class="form-control mb-2"
+                                   min="0"
+                                   placeholder="Masukkan nominal uang tunai"
+                                   {{ $sale->status === 'COMPLETED' ? 'disabled' : '' }}>
+
+                            <div class="d-flex justify-content-between">
+                                <span>Kembalian:</span>
+                                <span id="kembalianText">Rp 0</span>
+                            </div>
+
+                        </div>
+
+
+                        {{-- QR CODE (HANYA UNTUK QRIS) --}}
+                        <div id="qrisPaymentBox">
+
+                            <img src="{{ asset('images/qris.png') }}" alt="QRIS">
+
+                            <div class="qris-total">
+                                Rp {{ number_format($sale->total_pembayaran) }}
+                            </div>
+
+                            <small class="text-muted d-block mt-1">
+                                Scan kode di atas menggunakan aplikasi e-wallet/mobile banking
+                            </small>
+
+                        </div>
 
 
                         <button type="submit"
@@ -496,6 +574,7 @@
 {{-- JAVASCRIPT LIVE SEARCH PRODUK --}}
 <script>
     const productsList = @json($products);
+    const totalPembayaran = {{ $sale->total_pembayaran }};
 
     const searchInput = document.getElementById('searchProductInput');
     const searchResult = document.getElementById('productSearchResult');
@@ -558,6 +637,70 @@
                 }
             }
         });
+    }
+
+    // ===== TOGGLE KOTAK PEMBAYARAN SESUAI METODE =====
+    const paymentMethod = document.getElementById('paymentMethod');
+    const cashPaymentBox = document.getElementById('cashPaymentBox');
+    const jumlahBayar = document.getElementById('jumlahBayar');
+    const kembalianText = document.getElementById('kembalianText');
+    const qrisPaymentBox = document.getElementById('qrisPaymentBox');
+
+    function togglePaymentBox() {
+        if (paymentMethod.value === 'CASH') {
+
+            cashPaymentBox.style.display = 'block';
+            jumlahBayar.setAttribute('required', 'required');
+
+            qrisPaymentBox.style.display = 'none';
+
+        } else if (paymentMethod.value === 'QRIS') {
+
+            qrisPaymentBox.style.display = 'block';
+
+            cashPaymentBox.style.display = 'none';
+            jumlahBayar.removeAttribute('required');
+            jumlahBayar.value = '';
+            kembalianText.textContent = 'Rp 0';
+            kembalianText.classList.remove('text-danger');
+
+        } else {
+
+            cashPaymentBox.style.display = 'none';
+            qrisPaymentBox.style.display = 'none';
+            jumlahBayar.removeAttribute('required');
+
+        }
+    }
+
+    function hitungKembalian() {
+        const bayar = parseFloat(jumlahBayar.value) || 0;
+        const kembalian = bayar - totalPembayaran;
+
+        if (kembalian < 0) {
+            kembalianText.textContent = 'Kurang Rp ' + Math.abs(kembalian).toLocaleString('id-ID');
+            kembalianText.classList.add('text-danger');
+        } else {
+            kembalianText.textContent = 'Rp ' + kembalian.toLocaleString('id-ID');
+            kembalianText.classList.remove('text-danger');
+        }
+    }
+
+    function validateCashPayment() {
+        if (paymentMethod.value === 'CASH') {
+            const bayar = parseFloat(jumlahBayar.value) || 0;
+            if (bayar < totalPembayaran) {
+                alert('Jumlah bayar tidak boleh kurang dari total pembayaran.');
+                return false;
+            }
+        }
+        return confirm('Yakin ingin checkout?');
+    }
+
+    if (paymentMethod) {
+        paymentMethod.addEventListener('change', togglePaymentBox);
+        jumlahBayar.addEventListener('input', hitungKembalian);
+        togglePaymentBox(); // jalankan sekali saat load, untuk kasus old('payment_method')
     }
 </script>
 

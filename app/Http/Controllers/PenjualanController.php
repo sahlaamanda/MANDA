@@ -186,15 +186,37 @@ class PenjualanController extends Controller
         if ($request->has('payment_method')) {
 
             $request->validate([
-                'payment_method' => 'required|string'
+                'payment_method' => 'required|string|in:CASH,QRIS',
+                'jumlah_bayar'   => 'required_if:payment_method,CASH|nullable|integer|min:0',
             ]);
 
             $sale->load('itemPenjualan');
 
+            $total = $sale->itemPenjualan->sum('subtotal');
+
+            $jumlahBayar = null;
+            $kembalian = null;
+
+            if ($request->payment_method === 'CASH') {
+
+                $jumlahBayar = (int) $request->jumlah_bayar;
+
+                // Validasi ulang di server, jangan percaya JS
+                if ($jumlahBayar < $total) {
+                    return back()
+                        ->withErrors(['jumlah_bayar' => 'Jumlah bayar tidak boleh kurang dari total pembayaran.'])
+                        ->withInput();
+                }
+
+                $kembalian = $jumlahBayar - $total;
+            }
+
             $sale->update([
                 'metode_pembayaran' => $request->payment_method,
-                'total_pembayaran' => $sale->itemPenjualan->sum('subtotal'),
-                'status' => 'COMPLETED'
+                'total_pembayaran'  => $total,
+                'jumlah_bayar'      => $jumlahBayar,
+                'kembalian'         => $kembalian,
+                'status'            => 'COMPLETED'
             ]);
 
             // FIX: jangan pakai back() di sini.

@@ -166,7 +166,7 @@
                         <th>Foto</th>
                         <th>Nama Produk</th>
                         <th>Jenis</th>
-                        <th>Harga Beli</th>
+                        <th>Harga Pokok</th>
                         <th>Harga Jual</th>
                         <th>Stok</th>
                         <th width="180">Aksi</th>
@@ -237,7 +237,7 @@
 
 
 
-                        {{-- HARGA BELI --}}
+                        {{-- HARGA POKOK --}}
 
                         <td>
 

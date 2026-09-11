@@ -28,13 +28,13 @@
 <div class="container mt-4" style="max-width: 800px;">
     <div class="about-card mb-4">
         <div class="about-header text-center">
-            <h3 class="fw-bold mb-1">Point of Sale (POS) </h3>
-            <p class="mb-0 opacity-75">Sistem Manajemen Penjualan Toko / Kasir</p>
+            <h3 class="fw-bold mb-1">Bite & Brew  </h3>
+            <p class="mb-0 opacity-75">Sistem Manajemen Penjualan Toko</p>
         </div>
         <div class="p-4">
             <h5 class="fw-bold text-danger mb-3">Tentang Sistem</h5>
             <p class="text-muted leading-relaxed">
-                Aplikasi POS ini dirancang untuk memudahkan proses pengelolaan stok produk, kategori barang, hingga pencatatan transaksi penjualan secara efisien. Sistem ini juga dilengkapi dengan cetak struk dan manajemen akses untuk Admin serta Kasir.
+                Aplikasi ini dirancang untuk memudahkan proses pengelolaan stok produk, kategori barang, hingga pencatatan transaksi penjualan secara efisien. Sistem ini juga dilengkapi dengan cetak struk dan manajemen akses untuk Admin serta Kasir.
             </p>
 
             <h5 class="fw-bold text-danger mt-4 mb-3">Fitur Utama</h5>

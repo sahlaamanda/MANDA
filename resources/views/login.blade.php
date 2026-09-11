@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Login POS Sahla')
+@section('title', 'Bite & Brew')
 
 @section('content')
 
@@ -113,7 +113,7 @@ body{
 
 
                     <h3 class="fw-bold mb-1">
-                        POS Sahla
+                        Bite & Brew
                     </h3>
 
 

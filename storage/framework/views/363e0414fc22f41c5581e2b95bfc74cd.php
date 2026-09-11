@@ -29,12 +29,14 @@
         </li>
 
         
+        <?php if(auth()->user()->role?->name === 'admin'): ?>
         <li class="nav-item">
           <a class="nav-link <?php echo e(Request::is('admin/users*') ? 'active' : ''); ?>"
              href="<?php echo e(route('admin.users.index')); ?>">
              Users
           </a>
         </li>
+        <?php endif; ?>
 
         
         <li class="nav-item">
@@ -60,7 +62,7 @@
           </a>
         </li>
 
-        
+
 
         
 <li class="nav-item">

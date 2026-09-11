@@ -317,9 +317,6 @@ color:#800020!important;
     @endcan
 
     {{-- INVENTORY STATUS --}}
-    <div class="section-header-custom">
-        <span class="section-title-custom"><i class="fas fa-boxes-stacked me-2 text-danger"></i>Critical Inventory Status</span>
-    </div>
 
     <div class="row g-4 mb-4">
         
@@ -403,14 +400,7 @@ color:#800020!important;
 
     </div>
 
-    {{-- BEST SELLER PRODUCTS --}}
-<div class="section-header-custom">
-    <span class="section-title-custom">
-        <i class="fas fa-fire me-2 text-danger"></i>
-        Best Seller Products
-    </span>
-</div>
-
+   
 <div class="table-container mb-5">
 
     <div class="table-header-custom header-dark">

@@ -274,7 +274,7 @@
             <div class="app-purpose-box">
                 <h6> Tujuan Pembuatan Aplikasi</h6>
                 <p>
-                    AAplikasi Point of Sale (POS) ini saya kembangkan dalam rangka mengikuti ujian Uji Kompetensi Keahlian (Ujikom) kelas XII jurusan PPLG SMKN 4 Tasikmalaya. Harapannya, sistem kasir ini dapat memberikan kemudahan dalam pengelolaan data produk, proses transaksi tunai, hingga rekap laporan penjualan.
+                    Aplikasi Point of Sale (POS) ini saya kembangkan dalam rangka mengikuti ujian Uji Kompetensi Keahlian (Ujikom) kelas XII jurusan PPLG SMKN 4 Tasikmalaya. Harapannya, sistem kasir ini dapat memberikan kemudahan dalam pengelolaan data produk, proses transaksi tunai, hingga rekap laporan penjualan.
                 </p>
             </div>
         </div>

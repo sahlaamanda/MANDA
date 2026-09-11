@@ -28,13 +28,15 @@
           </a>
         </li>
 
-        {{-- USERS --}}
+        {{-- USERS (HANYA UNTUK ADMIN) --}}
+        @if(auth()->user()->role?->name === 'admin')
         <li class="nav-item">
           <a class="nav-link {{ Request::is('admin/users*') ? 'active' : '' }}"
              href="{{ route('admin.users.index') }}">
              Users
           </a>
         </li>
+        @endif
 
         {{-- JENIS PRODUK --}}
         <li class="nav-item">
@@ -60,7 +62,7 @@
           </a>
         </li>
 
-        
+
 
         {{-- PROFILE--}}
 <li class="nav-item">
