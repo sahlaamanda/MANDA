@@ -2,9 +2,9 @@
   <div class="container">
 
     
-    <a class="navbar-brand d-flex align-items-center gap-2" href="<?php echo e(route('dashboard')); ?>">
-      <img src="<?php echo e(asset('images/logo_sahla.png')); ?>" alt="Logo POS" height="100" class="d-inline-block align-text-top">
-      <span>POS</span>
+    <a class="navbar-brand d-flex align-items-center gap-2" href="<?php echo e(route('admin.about')); ?>">
+      <img src="<?php echo e(asset('images/logo_sahla_cosmetics_v2.png')); ?>" alt="Logo Kosmetik" height="68" class="d-inline-block align-text-top" style="object-fit: contain;">
+      <span class="fs-6 fw-semibold" style="color: var(--text-main, #3d0a17);">kosmetik sahla</span>
     </a>
 
     <button class="navbar-toggler" type="button"

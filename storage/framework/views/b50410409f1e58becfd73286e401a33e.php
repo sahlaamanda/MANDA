@@ -85,6 +85,16 @@
                     <td colspan="3" class="text-end fw-bold">Total Pembayaran:</td>
                     <td class="text-end fw-bold text-success">Rp <?php echo e(number_format($sale->total_pembayaran, 0, ',', '.')); ?></td>
                 </tr>
+                <?php if($sale->metode_pembayaran === 'CASH'): ?>
+                <tr>
+                    <td colspan="3" class="text-end fw-bold">Uang Bayar:</td>
+                    <td class="text-end fw-bold">Rp <?php echo e(number_format((int) ($sale->jumlah_bayar ?? 0), 0, ',', '.')); ?></td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="text-end fw-bold">Kembalian:</td>
+                    <td class="text-end fw-bold text-danger">Rp <?php echo e(number_format((int) ($sale->kembalian ?? 0), 0, ',', '.')); ?></td>
+                </tr>
+                <?php endif; ?>
             </tfoot>
         </table>
 

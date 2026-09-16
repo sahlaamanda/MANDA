@@ -27,6 +27,11 @@
             <p><strong>Status:</strong> <?php echo e($sale->status); ?></p>
             <p><strong>Total:</strong> Rp.<?php echo e(number_format($sale->total_pembayaran,0,',','.')); ?></p>
 
+            <?php if($sale->metode_pembayaran === 'CASH'): ?>
+                <p><strong>Uang Bayar:</strong> Rp.<?php echo e(number_format((int) ($sale->jumlah_bayar ?? 0),0,',','.')); ?></p>
+                <p><strong>Kembalian:</strong> Rp.<?php echo e(number_format((int) ($sale->kembalian ?? 0),0,',','.')); ?></p>
+            <?php endif; ?>
+
         </div>
     </div>
 

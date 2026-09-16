@@ -1,6 +1,6 @@
 
 
-<?php $__env->startSection('title', 'Bite & Brew'); ?>
+<?php $__env->startSection('title', 'kosmetik'); ?>
 
 <?php $__env->startSection('content'); ?>
 
@@ -113,7 +113,7 @@ body{
 
 
                     <h3 class="fw-bold mb-1">
-                        Bite & Brew
+                        kosmetik
                     </h3>
 
 

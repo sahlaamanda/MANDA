@@ -27,6 +27,11 @@
             <p><strong>Status:</strong> {{ $sale->status }}</p>
             <p><strong>Total:</strong> Rp.{{ number_format($sale->total_pembayaran,0,',','.') }}</p>
 
+            @if($sale->metode_pembayaran === 'CASH')
+                <p><strong>Uang Bayar:</strong> Rp.{{ number_format((int) ($sale->jumlah_bayar ?? 0),0,',','.') }}</p>
+                <p><strong>Kembalian:</strong> Rp.{{ number_format((int) ($sale->kembalian ?? 0),0,',','.') }}</p>
+            @endif
+
         </div>
     </div>
 
