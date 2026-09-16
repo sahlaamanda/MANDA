@@ -43,7 +43,7 @@
         <!-- Header -->
         <div class="text-center mb-4">
             <h3 class="fw-bold mb-1">STRUK PEMBELIAN</h3>
-            <p class="text-muted mb-0">Toko POS Sahlaamnda</p>
+            <p class="text-muted mb-0">Cutie Cosmetics</p>
         </div>
 
         <hr>

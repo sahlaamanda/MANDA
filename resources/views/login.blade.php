@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'kosmetik')
+@section('title', 'Cutie Cosmetics')
 
 @section('content')
 
@@ -113,7 +113,7 @@ body{
 
 
                     <h3 class="fw-bold mb-1">
-                        kosmetik
+                       Cutie Cosmetics
                     </h3>
 
 

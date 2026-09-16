@@ -28,7 +28,7 @@
 <div class="container mt-4" style="max-width: 800px;">
     <div class="about-card mb-4">
         <div class="about-header text-center">
-            <h3 class="fw-bold mb-1">kosmetik</h3>
+            <h3 class="fw-bold mb-1">Cutie Cosmetics</h3>
             <p class="mb-0 opacity-75">Sistem Manajemen Penjualan Toko</p>
         </div>
         <div class="p-4">

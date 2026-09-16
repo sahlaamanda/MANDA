@@ -4,11 +4,12 @@
     
     <a class="navbar-brand d-flex align-items-center gap-2" href="<?php echo e(route('admin.about')); ?>">
       <img src="<?php echo e(asset('images/logo_sahla_cosmetics_v2.png')); ?>" alt="Logo Kosmetik" height="68" class="d-inline-block align-text-top" style="object-fit: contain;">
-      <span class="fs-6 fw-semibold" style="color: var(--text-main, #3d0a17);">kosmetik sahla</span>
+      <span class="fs-6 fw-semibold" style="color: var(--text-main, #3d0a17);">Cutie Cosmetics</span>
     </a>
 
     <button class="navbar-toggler" type="button"
       data-bs-toggle="collapse"
+  
       data-bs-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent"
       aria-expanded="false"
