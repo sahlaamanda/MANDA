@@ -107,53 +107,32 @@
 
 
         <div class="d-flex justify-content-between align-items-center mb-4">
-
-
             <a href="<?php echo e(route('admin.produk.create')); ?>" 
                class="btn btn-maroon">
-
                 ➕ Tambah Produk
-
             </a>
-
-
 
             <form action="<?php echo e(route('admin.produk.index')); ?>" 
                   method="GET"
                   style="width:350px;">
 
-
                 <div class="input-group">
-
-
                     <input type="text"
                            name="search"
                            class="form-control"
                            placeholder="Cari nama produk..."
                            value="<?php echo e(request('search')); ?>">
 
-
-
                     <button class="btn btn-maroon">
-
                         🔍 Cari
-
                     </button>
-
-
                 </div>
-
-
             </form>
-
-
         </div>
 
 
 
         <div class="table-responsive">
-
-
             <table class="table table-hover align-middle">
 
 

@@ -107,32 +107,21 @@
 
 
         <div class="d-flex justify-content-between align-items-center mb-4">
-
-
             <a href="{{ route('admin.produk.create') }}" 
                class="btn btn-maroon">
-
                 ➕ Tambah Produk
-
             </a>
-
-
 
             <form action="{{ route('admin.produk.index') }}" 
                   method="GET"
                   style="width:350px;">
 
-
                 <div class="input-group">
-
-
                     <input type="text"
                            name="search"
                            class="form-control"
                            placeholder="Cari nama produk..."
                            value="{{ request('search') }}">
-
-
 
                     <button class="btn btn-maroon">
 
@@ -215,20 +204,11 @@
                             @endif
 
                         </td>
-
-
-
-
                         <td>
-
                             <strong>
                                 {{ $item->nama }}
                             </strong>
-
                         </td>
-
-
-
 {{-- JENIS PRODUK --}}
 <td>
     {{ $item->jenis->nama ?? '-' }}

@@ -115,8 +115,6 @@ body{
                     <h3 class="fw-bold mb-1">
                        Cutie Cosmetics
                     </h3>
-
-
                     <small>
                         Selamat Datang
                     </small>
@@ -131,15 +129,11 @@ body{
                         {{-- EMAIL --}}
 
                         <div class="mb-3">
-
-
                             <label for="email" class="form-label">
                                 Email
                             </label>
 
-
                             <input
-
                                 type="email"
                                 name="email"
                                 id="email"
@@ -153,25 +147,17 @@ body{
 
 
                             @error('email')
-
                                 <div class="invalid-feedback">
                                     {{ $message }}
                                 </div>
-
                             @enderror
 
-
                         </div>
-
-
                         {{-- PASSWORD --}}
-
                         <div class="mb-4">
-
                             <label for="password" class="form-label">
                                 Password
                             </label>
-
 
                             <input
 
@@ -179,20 +165,15 @@ body{
                                 name="password"
                                 id="password"
                                 class="form-control @error('password') is-invalid @enderror"
-
+                               
                                 placeholder="Masukkan password"
 
                             >
 
                             @error('password')
 
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-
+                                <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
-
-
                         </div>
 
                         {{-- LOGIN BUTTON --}}

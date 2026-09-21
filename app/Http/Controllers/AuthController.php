@@ -16,25 +16,18 @@ class AuthController extends Controller
 
     public function auth(LoginRequest $request)
     {
-
         $credentials = $request->validated();
-
-
         // Cek email dan password
         if (Auth::attempt([
             'email' => $credentials['email'],
             'password' => $credentials['password']
+
         ])) {
 
 
             $request->session()->regenerate();
-
-
             $user = Auth::user();
-
-
             $roleUser = optional($user->role)->name;
-
 
             /*
             |--------------------------------------------------------------------------
@@ -51,7 +44,6 @@ class AuthController extends Controller
                     ->route('dashboard')
 
                     ->with('success',
-
                         'Selamat Datang '
                         . ucfirst($roleUser)
                         . ', '
@@ -62,7 +54,6 @@ class AuthController extends Controller
 
             }
 
-
             /*
             |--------------------------------------------------------------------------
             | ROLE TIDAK DITEMUKAN
@@ -71,55 +62,25 @@ class AuthController extends Controller
 
 
             Auth::logout();
-
-
             return back()->withErrors([
-
                 'role'=>'Role user tidak ditemukan.'
-
             ]);
-
-
-
         }
-
-
-
-
         return back()->withErrors([
-
             'email'=>'Email atau password tidak valid'
-
         ]);
-
     }
-
-
-
 
 
     public function logout(Request $request)
     {
-
-
         Auth::logout();
-
-
         $request->session()->invalidate();
-
-
         $request->session()->regenerateToken();
-
-
-
         return redirect()
-
             ->route('login')
-
             ->with('success',
-
                 'Anda telah berhasil logout.'
-
             );
 
     }

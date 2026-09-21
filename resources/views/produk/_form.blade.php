@@ -196,11 +196,11 @@
 </div>
 
 
-{{-- HARGA BELI --}}
+{{-- HARGA POKOK --}}
 <div class="mb-3">
 
     <label for="harga_beli" class="form-label">
-        Harga Beli
+        Harga Pokok
     </label>
 
     <input
@@ -210,7 +210,7 @@
         class="form-control @error('harga_beli') is-invalid @enderror"
         value="{{ old('harga_beli', $produk?->harga_beli ?? '') }}"
         min="0"
-        placeholder="Masukkan harga beli"
+        placeholder="Masukkan harga pokok"
         required
     >
 
@@ -242,13 +242,11 @@
     >
 
     @error('harga_jual')
-        <div class="invalid-feedback">
-            {{ $message }}
-        </div>
+        <div class="invalid-feedback"> {{ $message }} </div>
+        <div class=
     @enderror
 
 </div>
-
 
 {{-- STOK --}}
 <div class="mb-3">

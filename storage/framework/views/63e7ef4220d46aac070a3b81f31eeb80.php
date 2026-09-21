@@ -248,7 +248,7 @@ unset($__errorArgs, $__bag); ?>
 <div class="mb-3">
 
     <label for="harga_beli" class="form-label">
-        Harga Beli
+        Harga Pokok
     </label>
 
     <input
@@ -265,7 +265,7 @@ endif;
 unset($__errorArgs, $__bag); ?>"
         value="<?php echo e(old('harga_beli', $produk?->harga_beli ?? '')); ?>"
         min="0"
-        placeholder="Masukkan harga beli"
+        placeholder="Masukkan harga pokok"
         required
     >
 
@@ -316,17 +316,14 @@ $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
-        <div class="invalid-feedback">
-            <?php echo e($message); ?>
-
-        </div>
+        <div class="invalid-feedback"> <?php echo e($message); ?> </div>
+        <div class=
     <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
 
 </div>
-
 
 
 <div class="mb-3">
@@ -372,7 +369,7 @@ unset($__errorArgs, $__bag); ?>
 
 
 <div class="d-flex gap-2 mt-4">
-    <button type="submit" class="btn btn-maroon">💾 Simpan</button>
+    <button type="submit" class="btn btn-maroon"></button>
     <a href="<?php echo e(route('admin.produk.index')); ?>" class="btn btn-batal">Batal</a>
 </div>
 

@@ -115,8 +115,6 @@ body{
                     <h3 class="fw-bold mb-1">
                        Cutie Cosmetics
                     </h3>
-
-
                     <small>
                         Selamat Datang
                     </small>
@@ -131,15 +129,11 @@ body{
                         
 
                         <div class="mb-3">
-
-
                             <label for="email" class="form-label">
                                 Email
                             </label>
 
-
                             <input
-
                                 type="email"
                                 name="email"
                                 id="email"
@@ -164,29 +158,21 @@ $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
-
                                 <div class="invalid-feedback">
                                     <?php echo e($message); ?>
 
                                 </div>
-
                             <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
 
-
                         </div>
-
-
                         
-
                         <div class="mb-4">
-
                             <label for="password" class="form-label">
                                 Password
                             </label>
-
 
                             <input
 
@@ -201,7 +187,7 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>"
-
+                               
                                 placeholder="Masukkan password"
 
                             >
@@ -212,17 +198,11 @@ if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }
 $message = $__bag->first($__errorArgs[0]); ?>
 
-                                <div class="invalid-feedback">
-                                    <?php echo e($message); ?>
-
-                                </div>
-
+                                <div class="invalid-feedback"><?php echo e($message); ?></div>
                             <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
-
-
                         </div>
 
                         
