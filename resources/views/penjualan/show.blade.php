@@ -4,6 +4,11 @@
 
 @section('content')
 
+@php
+    $subtotalPenjualan = $sale->itemPenjualan->sum('subtotal');
+    $diskonPenjualan = $subtotalPenjualan - $sale->total_pembayaran;
+@endphp
+
 <div class="container">
 
     <div class="d-flex justify-content-between align-items-center mb-4">
@@ -25,6 +30,8 @@
             <p><strong>Kasir:</strong> {{ $sale->user->name }}</p>
             <p><strong>Metode Pembayaran:</strong> {{ $sale->metode_pembayaran }}</p>
             <p><strong>Status:</strong> {{ $sale->status }}</p>
+            <p><strong>Subtotal:</strong> Rp.{{ number_format($subtotalPenjualan,0,',','.') }}</p>
+            <p><strong>Diskon (15%):</strong> - Rp.{{ number_format($diskonPenjualan,0,',','.') }}</p>
             <p><strong>Total:</strong> Rp.{{ number_format($sale->total_pembayaran,0,',','.') }}</p>
 
             @if($sale->metode_pembayaran === 'CASH')

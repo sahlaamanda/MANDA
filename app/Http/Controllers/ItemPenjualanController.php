@@ -55,7 +55,9 @@ class ItemPenjualanController extends Controller
             $item->save();
 
             $sale->update([
-                'total_pembayaran' => $sale->itemPenjualan()->sum('subtotal')
+                'total_pembayaran' => Penjualan::totalDenganDiskon(
+                    $sale->itemPenjualan()->sum('subtotal')
+                )
             ]);
         });
 
@@ -91,8 +93,9 @@ class ItemPenjualanController extends Controller
             ]);
 
             $itempenjualan->penjualan->update([
-                'total_pembayaran' =>
+                'total_pembayaran' => Penjualan::totalDenganDiskon(
                     $itempenjualan->penjualan->itemPenjualan()->sum('subtotal')
+                )
             ]);
         });
 
@@ -116,7 +119,9 @@ class ItemPenjualanController extends Controller
 
             // update total
             $sale->update([
-                'total_pembayaran' => $sale->itemPenjualan()->sum('subtotal')
+                'total_pembayaran' => Penjualan::totalDenganDiskon(
+                    $sale->itemPenjualan()->sum('subtotal')
+                )
             ]);
         });
 

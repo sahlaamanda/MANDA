@@ -11,6 +11,8 @@ class Penjualan extends Model
 {
     use HasFactory;
 
+    public const DISKON_PERSEN = 15;
+
     protected $table = 'penjualan';
 
     protected $fillable = [
@@ -21,6 +23,11 @@ class Penjualan extends Model
         'kembalian',
         'status',
     ];
+
+    public static function totalDenganDiskon(int $subtotal): int
+    {
+        return (int) round($subtotal * (100 - self::DISKON_PERSEN) / 100);
+    }
 
     public function user()
     {

@@ -289,6 +289,24 @@ unset($__errorArgs, $__bag); ?>
 
 <div class="mb-3">
 
+    <label for="laba" class="form-label">
+        Laba
+    </label>
+
+    <input
+        type="text"
+        id="laba"
+        class="form-control"
+        value="30%"
+        readonly
+    >
+
+</div>
+
+
+
+<div class="mb-3">
+
     <label for="harga_jual" class="form-label">
         Harga Jual
     </label>
@@ -307,8 +325,9 @@ endif;
 unset($__errorArgs, $__bag); ?>"
         value="<?php echo e(old('harga_jual', $produk?->harga_jual ?? '')); ?>"
         min="0"
-        placeholder="Masukkan harga jual"
+        placeholder="Otomatis dari harga pokok"
         required
+        readonly
     >
 
     <?php $__errorArgs = ['harga_jual'];
@@ -369,13 +388,27 @@ unset($__errorArgs, $__bag); ?>
 
 
 <div class="d-flex gap-2 mt-4">
-    <button type="submit" class="btn btn-maroon"></button>
+    <button type="submit" class="btn btn-maroon">💾 Simpan</button>
     <a href="<?php echo e(route('admin.produk.index')); ?>" class="btn btn-batal">Batal</a>
 </div>
 
 
 
 <script>
+const hargaBeliInput = document.getElementById('harga_beli');
+const hargaJualInput = document.getElementById('harga_jual');
+
+function hitungHargaJual() {
+    const hargaBeli = Number(hargaBeliInput.value);
+
+    hargaJualInput.value = Number.isFinite(hargaBeli) && hargaBeli >= 0
+        ? Math.round(hargaBeli * 1.3)
+        : '';
+}
+
+hargaBeliInput.addEventListener('input', hitungHargaJual);
+hitungHargaJual();
+
 function previewImage(input) {
 
     const preview = document.getElementById('preview');

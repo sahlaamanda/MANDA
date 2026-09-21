@@ -4,6 +4,11 @@
 
 <?php $__env->startSection('content'); ?>
 
+<?php
+    $subtotalPenjualan = $sale->itemPenjualan->sum('subtotal');
+    $diskonPenjualan = $subtotalPenjualan - $sale->total_pembayaran;
+?>
+
 <div class="container">
 
     <div class="d-flex justify-content-between align-items-center mb-4">
@@ -25,6 +30,8 @@
             <p><strong>Kasir:</strong> <?php echo e($sale->user->name); ?></p>
             <p><strong>Metode Pembayaran:</strong> <?php echo e($sale->metode_pembayaran); ?></p>
             <p><strong>Status:</strong> <?php echo e($sale->status); ?></p>
+            <p><strong>Subtotal:</strong> Rp.<?php echo e(number_format($subtotalPenjualan,0,',','.')); ?></p>
+            <p><strong>Diskon (15%):</strong> - Rp.<?php echo e(number_format($diskonPenjualan,0,',','.')); ?></p>
             <p><strong>Total:</strong> Rp.<?php echo e(number_format($sale->total_pembayaran,0,',','.')); ?></p>
 
             <?php if($sale->metode_pembayaran === 'CASH'): ?>

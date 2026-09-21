@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <html lang="id">
+@php
+    $subtotalPenjualan = $sale->itemPenjualan->sum('subtotal');
+    $diskonPenjualan = $subtotalPenjualan - $sale->total_pembayaran;
+@endphp
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -81,6 +85,14 @@
                 @endforeach
             </tbody>
             <tfoot>
+                <tr>
+                    <td colspan="3" class="text-end">Subtotal:</td>
+                    <td class="text-end">Rp {{ number_format($subtotalPenjualan, 0, ',', '.') }}</td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="text-end">Diskon (15%):</td>
+                    <td class="text-end text-danger">- Rp {{ number_format($diskonPenjualan, 0, ',', '.') }}</td>
+                </tr>
                 <tr>
                     <td colspan="3" class="text-end fw-bold">Total Pembayaran:</td>
                     <td class="text-end fw-bold text-success">Rp {{ number_format($sale->total_pembayaran, 0, ',', '.') }}</td>

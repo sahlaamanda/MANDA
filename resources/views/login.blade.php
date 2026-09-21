@@ -122,7 +122,16 @@ body{
                 </div>
 
                 <div class="login-body">
-                    <form action="{{ route('auth') }}" method="POST">
+                    @if ($errors->has('login'))
+                        @php
+                            $loginSeconds = (int) ($errors->get('login_seconds')[0] ?? 30);
+                        @endphp
+                        <div class="alert alert-danger" role="alert" id="loginLockAlert" data-seconds="{{ $loginSeconds }}">
+                            <span id="loginLockMessage">Anda gagal login 3 kali. Silakan tunggu <strong id="loginCountdown">{{ $loginSeconds }}</strong> detik sebelum mencoba lagi.</span>
+                        </div>
+                    @endif
+
+                    <form action="{{ route('auth') }}" method="POST" autocomplete="off">
 
                         @csrf
 
@@ -139,6 +148,7 @@ body{
                                 id="email"
                                 value="{{ old('email') }}"
                                 class="form-control @error('email') is-invalid @enderror"
+                                autocomplete="off"
 
                                 placeholder="Masukkan email"
                                 autofocus
@@ -165,6 +175,7 @@ body{
                                 name="password"
                                 id="password"
                                 class="form-control @error('password') is-invalid @enderror"
+                                autocomplete="new-password"
                                
                                 placeholder="Masukkan password"
 
@@ -180,8 +191,10 @@ body{
 
                         <div class="d-grid">
 
-                            <button type="submit"
-                                    class="btn btn-login">
+                                <button type="submit"
+                                    id="loginButton"
+                                    class="btn btn-login"
+                                    @if ($errors->has('login')) disabled @endif>
                                 🔐 Login
                             </button>
 
@@ -196,6 +209,28 @@ body{
         </div>
     </div>
 </div>
+
+@if ($errors->has('login'))
+    <script>
+        const loginLockAlert = document.getElementById('loginLockAlert');
+        const loginCountdown = document.getElementById('loginCountdown');
+        const loginButton = document.getElementById('loginButton');
+        let remainingSeconds = Number(loginLockAlert.dataset.seconds);
+
+        const countdownTimer = setInterval(() => {
+            remainingSeconds -= 1;
+            loginCountdown.textContent = Math.max(remainingSeconds, 0);
+
+            if (remainingSeconds <= 0) {
+                clearInterval(countdownTimer);
+                loginLockAlert.classList.remove('alert-danger');
+                loginLockAlert.classList.add('alert-success');
+                loginLockAlert.textContent = 'Waktu tunggu selesai. Silakan coba login kembali.';
+                loginButton.disabled = false;
+            }
+        }, 1000);
+    </script>
+@endif
 
 
 @endsection

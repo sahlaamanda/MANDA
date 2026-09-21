@@ -45,7 +45,7 @@ class ProdukController extends Controller
             'nama'       => $data['nama'],
             'jenis_id'   => $data['jenis_id'],
             'harga_beli' => $data['harga_beli'],
-            'harga_jual' => $data['harga_jual'],
+            'harga_jual' => (int) round($data['harga_beli'] * 1.3),
             'stok'       => $data['stok'],
             'foto'       => null,
         ];
@@ -78,7 +78,7 @@ class ProdukController extends Controller
             'nama'       => $data['nama'],
             'jenis_id'   => $data['jenis_id'],
             'harga_beli' => $data['harga_beli'],
-            'harga_jual' => $data['harga_jual'],
+            'harga_jual' => (int) round($data['harga_beli'] * 1.3),
             'stok'       => $data['stok'],
         ];
 

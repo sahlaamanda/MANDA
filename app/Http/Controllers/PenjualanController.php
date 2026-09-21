@@ -192,7 +192,8 @@ class PenjualanController extends Controller
 
             $sale->load('itemPenjualan');
 
-            $total = $sale->itemPenjualan->sum('subtotal');
+            $subtotal = $sale->itemPenjualan->sum('subtotal');
+            $total = Penjualan::totalDenganDiskon($subtotal);
 
             $jumlahBayar = null;
             $kembalian = null;
@@ -253,7 +254,9 @@ class PenjualanController extends Controller
             }
 
             $sale->update([
-                'total_pembayaran' => $sale->itemPenjualan->sum('subtotal')
+                'total_pembayaran' => Penjualan::totalDenganDiskon(
+                    $sale->itemPenjualan->sum('subtotal')
+                )
             ]);
         }
 

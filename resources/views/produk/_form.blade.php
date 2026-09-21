@@ -223,6 +223,24 @@
 </div>
 
 
+{{-- LABA --}}
+<div class="mb-3">
+
+    <label for="laba" class="form-label">
+        Laba
+    </label>
+
+    <input
+        type="text"
+        id="laba"
+        class="form-control"
+        value="30%"
+        readonly
+    >
+
+</div>
+
+
 {{-- HARGA JUAL --}}
 <div class="mb-3">
 
@@ -237,8 +255,9 @@
         class="form-control @error('harga_jual') is-invalid @enderror"
         value="{{ old('harga_jual', $produk?->harga_jual ?? '') }}"
         min="0"
-        placeholder="Masukkan harga jual"
+        placeholder="Otomatis dari harga pokok"
         required
+        readonly
     >
 
     @error('harga_jual')
@@ -284,6 +303,20 @@
 
 {{-- JAVASCRIPT PREVIEW --}}
 <script>
+const hargaBeliInput = document.getElementById('harga_beli');
+const hargaJualInput = document.getElementById('harga_jual');
+
+function hitungHargaJual() {
+    const hargaBeli = Number(hargaBeliInput.value);
+
+    hargaJualInput.value = Number.isFinite(hargaBeli) && hargaBeli >= 0
+        ? Math.round(hargaBeli * 1.3)
+        : '';
+}
+
+hargaBeliInput.addEventListener('input', hitungHargaJual);
+hitungHargaJual();
+
 function previewImage(input) {
 
     const preview = document.getElementById('preview');

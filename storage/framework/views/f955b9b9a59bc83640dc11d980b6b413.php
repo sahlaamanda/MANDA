@@ -1,0 +1,94 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container">
+
+    
+    <a class="navbar-brand d-flex align-items-center gap-2" href="<?php echo e(route('admin.about')); ?>">
+      <img src="<?php echo e(asset('images/logo_sahla_cosmetics_v2.png')); ?>" alt="Logo Kosmetik" height="68" class="d-inline-block align-text-top" style="object-fit: contain;">
+      <span class="fs-6 fw-semibold" style="color: var(--text-main, #3d0a17);">Cutie Cosmetics</span>
+    </a>
+
+    <button class="navbar-toggler" type="button"
+      data-bs-toggle="collapse"
+  
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+
+        
+        <li class="nav-item">
+          <a class="nav-link <?php echo e(Request::is('dashboard') ? 'active' : ''); ?>"
+             href="<?php echo e(route('dashboard')); ?>">
+             Dashboard
+          </a>
+        </li>
+
+        
+        <?php if(auth()->user()->role?->name === 'admin'): ?>
+        <li class="nav-item">
+          <a class="nav-link <?php echo e(Request::is('admin/users*') ? 'active' : ''); ?>"
+             href="<?php echo e(route('admin.users.index')); ?>">
+             Users
+          </a>
+        </li>
+        <?php endif; ?>
+
+        
+        <li class="nav-item">
+          <a class="nav-link <?php echo e(Request::is('admin/jenis*') ? 'active' : ''); ?>"
+             href="<?php echo e(route('admin.jenis.index')); ?>">
+             Jenis
+          </a>
+        </li>
+
+        
+        <li class="nav-item">
+          <a class="nav-link <?php echo e(Request::is('admin/produk*') ? 'active' : ''); ?>"
+             href="<?php echo e(route('admin.produk.index')); ?>">
+             Produk
+          </a>
+        </li>
+
+        
+        <li class="nav-item">
+          <a class="nav-link <?php echo e(Request::is('admin/penjualan*') ? 'active' : ''); ?>"
+             href="<?php echo e(route('admin.penjualan.index')); ?>">
+             Penjualan
+          </a>
+        </li>
+
+
+
+        
+<li class="nav-item">
+  <a class="nav-link <?php echo e(Request::is('admin/profile*') ? 'active' : ''); ?>"
+     href="<?php echo e(route('admin.profile')); ?>">
+     Profile
+  </a>
+</li>
+
+<li class="nav-item">
+    <a href="<?php echo e(route('admin.about')); ?>" class="nav-link <?php echo e(request()->routeIs('admin.about') ? 'active' : ''); ?>">
+        <span>Tentang Aplikasi</span>
+    </a>
+</li>
+
+      </ul>
+
+      
+      <form id="logout-form" action="<?php echo e(route('logout')); ?>" method="POST" class="d-none">
+        <?php echo csrf_field(); ?>
+      </form>
+      <button type="button" class="btn btn-danger" onclick="document.getElementById('logout-form').submit();">
+        Logout
+      </button>
+
+    </div>
+  </div>
+</nav><?php /**PATH C:\laragon\www\MANDA\resources\views\layouts\navbar.blade.php ENDPATH**/ ?>

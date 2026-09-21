@@ -122,7 +122,16 @@ body{
                 </div>
 
                 <div class="login-body">
-                    <form action="<?php echo e(route('auth')); ?>" method="POST">
+                    <?php if($errors->has('login')): ?>
+                        <?php
+                            $loginSeconds = (int) ($errors->get('login_seconds')[0] ?? 30);
+                        ?>
+                        <div class="alert alert-danger" role="alert" id="loginLockAlert" data-seconds="<?php echo e($loginSeconds); ?>">
+                            <span id="loginLockMessage">Anda gagal login 3 kali. Silakan tunggu <strong id="loginCountdown"><?php echo e($loginSeconds); ?></strong> detik sebelum mencoba lagi.</span>
+                        </div>
+                    <?php endif; ?>
+
+                    <form action="<?php echo e(route('auth')); ?>" method="POST" autocomplete="off">
 
                         <?php echo csrf_field(); ?>
 
@@ -146,6 +155,7 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>"
+                                autocomplete="off"
 
                                 placeholder="Masukkan email"
                                 autofocus
@@ -187,6 +197,7 @@ $message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>"
+                                autocomplete="new-password"
                                
                                 placeholder="Masukkan password"
 
@@ -209,8 +220,10 @@ unset($__errorArgs, $__bag); ?>
 
                         <div class="d-grid">
 
-                            <button type="submit"
-                                    class="btn btn-login">
+                                <button type="submit"
+                                    id="loginButton"
+                                    class="btn btn-login"
+                                    <?php if($errors->has('login')): ?> disabled <?php endif; ?>>
                                 🔐 Login
                             </button>
 
@@ -226,6 +239,28 @@ unset($__errorArgs, $__bag); ?>
         </div>
     </div>
 </div>
+
+<?php if($errors->has('login')): ?>
+    <script>
+        const loginLockAlert = document.getElementById('loginLockAlert');
+        const loginCountdown = document.getElementById('loginCountdown');
+        const loginButton = document.getElementById('loginButton');
+        let remainingSeconds = Number(loginLockAlert.dataset.seconds);
+
+        const countdownTimer = setInterval(() => {
+            remainingSeconds -= 1;
+            loginCountdown.textContent = Math.max(remainingSeconds, 0);
+
+            if (remainingSeconds <= 0) {
+                clearInterval(countdownTimer);
+                loginLockAlert.classList.remove('alert-danger');
+                loginLockAlert.classList.add('alert-success');
+                loginLockAlert.textContent = 'Waktu tunggu selesai. Silakan coba login kembali.';
+                loginButton.disabled = false;
+            }
+        }, 1000);
+    </script>
+<?php endif; ?>
 
 
 <?php $__env->stopSection(); ?>

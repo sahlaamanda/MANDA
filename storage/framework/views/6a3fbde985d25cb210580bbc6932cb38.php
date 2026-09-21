@@ -4,6 +4,11 @@
 
 <?php $__env->startSection('content'); ?>
 
+<?php
+    $subtotalPenjualan = $sale->itemPenjualan->sum('subtotal');
+    $diskonPenjualan = $subtotalPenjualan - $sale->total_pembayaran;
+?>
+
 <style>
     body{
         background:#FFF8FA;
@@ -424,13 +429,17 @@
                 
                 <div class="card-footer">
 
-
-                    <h5 class="mb-2" style="color:#800020;">
-
-                        Total:
-                        Rp <?php echo e(number_format($sale->total_pembayaran)); ?>
-
-
+                    <div class="d-flex justify-content-between">
+                        <span>Subtotal:</span>
+                        <span>Rp <?php echo e(number_format($subtotalPenjualan, 0, ',', '.')); ?></span>
+                    </div>
+                    <div class="d-flex justify-content-between text-danger">
+                        <span>Diskon (15%):</span>
+                        <span>- Rp <?php echo e(number_format($diskonPenjualan, 0, ',', '.')); ?></span>
+                    </div>
+                    <h5 class="d-flex justify-content-between mt-2 mb-2" style="color:#800020;">
+                        <span>Total:</span>
+                        <span>Rp <?php echo e(number_format($sale->total_pembayaran, 0, ',', '.')); ?></span>
                     </h5>
 
 
@@ -507,7 +516,7 @@
                             <img src="<?php echo e(asset('images/qris.png')); ?>" alt="QRIS">
 
                             <div class="qris-total">
-                                Rp <?php echo e(number_format($sale->total_pembayaran)); ?>
+                                Rp <?php echo e(number_format($sale->total_pembayaran, 0, ',', '.')); ?>
 
                             </div>
 

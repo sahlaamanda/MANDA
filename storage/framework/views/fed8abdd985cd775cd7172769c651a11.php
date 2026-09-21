@@ -124,15 +124,25 @@
                            value="<?php echo e(request('search')); ?>">
 
                     <button class="btn btn-maroon">
+
                         🔍 Cari
+
                     </button>
+
+
                 </div>
+
+
             </form>
+
+
         </div>
 
 
 
         <div class="table-responsive">
+
+
             <table class="table table-hover align-middle">
 
 
@@ -196,21 +206,12 @@
                             <?php endif; ?>
 
                         </td>
-
-
-
-
                         <td>
-
                             <strong>
                                 <?php echo e($item->nama); ?>
 
                             </strong>
-
                         </td>
-
-
-
 
 <td>
     <?php echo e($item->jenis->nama ?? '-'); ?>
